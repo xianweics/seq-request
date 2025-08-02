@@ -31,15 +31,13 @@ jobs:
       - name: Build project with pnpm
         run: pnpm run build
 
-      - name: Bump version (SemVer)
-        id: version-bump
-        uses: phips28/commits-to-semver-action@v4
+      - name: Bump version
+        id: bump
+        uses: actions/npm-version-bump@v1
         with:
-          commit-message: "${{ github.event.head_commit.message }}"
-          major-pattern: "BREAKING CHANGE|feat:"
-          minor-pattern: "fix:"
-          patch-pattern: ""  
-          output: "version"
+          commit-message: "release: v{version}" 
+          minor-bump-message: "fix:" 
+          major-bump-message: "BREAKING CHANGE|feat:"  
 
       - name: Login to npm
         run: |

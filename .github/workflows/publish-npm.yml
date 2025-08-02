@@ -64,7 +64,9 @@ jobs:
           npm whoami 
           
       - name: Publish to npm
-        run: |
-          npm publish --access public 
+        run: npm publish --access public --no-git-tag-version
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  
+
+      - name: Push Version Update
+        run: git push origin main

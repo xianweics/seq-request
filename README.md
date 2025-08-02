@@ -1,5 +1,9 @@
 # Request Manager
 
+[![codecov](https://codecov.io/github/xianweics/seq-request/graph/badge.svg?token=WT0T2S3TKT)](https://codecov.io/github/xianweics/seq-request)
+
+## Overview
+
 A lightweight TypeScript library for handling request deduplication. Only the latest request's result will be returned, previous requests' results will be ignored. Note that this does not actually cancel the underlying requests - they continue to execute in the background.
 
 ## Features
@@ -150,13 +154,13 @@ const result = await submitForm(formData);
 ### Install Dependencies
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### Run Tests
 
 ```bash
-npm test
+npm run test
 ```
 
 ### Build
@@ -173,7 +177,10 @@ npm run dev
 
 ## Feature improve
 
-- Enable to cancel older request:
+- [ ] Enable to cancel older request
+- [ ] Add request timeout support
+- [ ] Add request retry mechanism
+- [ ] Add request caching support
 
 ## License
 

@@ -1,6 +1,6 @@
 {
   "name": "sequence-request",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A lightweight TypeScript library for handling request deduplication. ",
   "type": "module",
   "main": "dist/index.js",
@@ -21,7 +21,14 @@
     "prepublish": "npm run lint && npm run test && npm run build",
     "example": "node example.js"
   },
-  "keywords": [],
+  "keywords": [
+    "request",
+    "deduplication",
+    "cancellation",
+    "timeout",
+    "retry",
+    "cache"
+  ],
   "author": "Xianwei Wu",
   "license": "MIT",
   "devDependencies": {
@@ -46,10 +53,10 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/xianweics/seq-request"
   },
   "bugs": {
-    "url": ""
+    "url": "https://github.com/xianweics/seq-request/issues"
   },
   "resolutions": {
     "glob": "^11.0.3"

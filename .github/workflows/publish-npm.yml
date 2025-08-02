@@ -31,14 +31,21 @@ jobs:
       - name: Build project with pnpm
         run: pnpm run build
 
-      - name: Bump version
-        id: bump
-        uses: actions/npm-version-bump@v1
-        with:
-          commit-message: "release: v{version}" 
-          minor-bump-message: "fix:" 
-          major-bump-message: "BREAKING CHANGE|feat:"  
-
+      - name: Determine Bump Type
+        id: bump-type
+        run: |
+          commit_msg=$(git log -1 --pretty=%B | grep -vE "ci|github-actions")
+          
+          if [[ "$commit_msg" == *"BREAKING CHANGE:"* || "$commit_msg" == *"feat:"* ]]; then
+            echo "type=major" >> $GITHUB_OUTPUT
+          elif [[ "$commit_msg" == *"fix:"* || "$commit_msg" == *"patch:"* ]]; then
+            echo "type=patch" >> $GITHUB_OUTPUT
+          elif [[ "$commit_msg" == *"chore:"* || "$commit_msg" == *"docs:"* || "$commit_msg" == *"style:"* || "$commit_msg" == *"refactor:"* ]]; then
+            echo "type=minor" >> $GITHUB_OUTPUT  
+          else
+            echo "type=patch" >> $GITHUB_OUTPUT  
+          fi
+          
       - name: Login to npm
         run: |
           npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
@@ -49,3 +56,9 @@ jobs:
           npm publish --access public 
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  
+          
+      - name: Bump Version
+        run: |
+          npm version ${{ steps.bump-type.outputs.type }} -m "chore: release v%s"
+          new_version=$(node -p "require('./package.json').version")
+          echo "New version: $new_version"

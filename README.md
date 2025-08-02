@@ -1,7 +1,6 @@
 # Request Manager
 
 [![Publish to npm](https://github.com/xianweics/seq-request/actions/workflows/publish-npm.yml/badge.svg)](https://github.com/xianweics/seq-request/actions/workflows/publish-npm.yml)
-
 [![codecov](https://codecov.io/github/xianweics/seq-request/graph/badge.svg?token=WT0T2S3TKT)](https://codecov.io/github/xianweics/seq-request)
 
 ## Overview

@@ -1,6 +1,6 @@
 {
   "name": "sequence-request",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "A lightweight TypeScript library for handling request deduplication. ",
   "type": "module",
   "main": "dist/index.js",

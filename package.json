@@ -1,0 +1,57 @@
+{
+  "name": "sequence-request",
+  "version": "0.0.1",
+  "description": "A lightweight TypeScript library for handling request deduplication. ",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src --ext .ts,.js",
+    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier --write \"src/**/*.{ts,js}\"",
+    "prepublish": "npm run lint && npm run test && npm run build",
+    "example": "node example.js"
+  },
+  "keywords": [],
+  "author": "Xianwei Wu",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "^9.32.0",
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-swc": "^0.4.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@swc/jest": "^0.2.39",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
+    "eslint": "^9.32.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.3",
+    "jest": "^30.0.5",
+    "prettier": "^3.6.2",
+    "rollup": "^4.46.2",
+    "rollup-plugin-dts": "^6.2.1",
+    "typescript": "^5.9.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": {
+    "url": ""
+  },
+  "resolutions": {
+    "glob": "^11.0.3"
+  }
+}

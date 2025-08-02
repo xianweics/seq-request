@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RequestManager</title>
+  <script src="../dist/index.js"></script>
+</head>
+<body>
+  <button id="btn">Send Request</button>
+  <div id="result"></div>
+  <div id="error"></div>
+</body>
+<script>
+  const fetchData = async (timeout = 1000) => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(timeout);
+      }, timeout);
+    });
+  }
+  const requestManager = new RequestManager();
+  const safeFetchData = requestManager.wrap(fetchData);
+  document.getElementById('btn').addEventListener('click', async() => {
+    const r = Math.random() * 3000;
+    Promise.all([safeFetchData(r), fetchData(r)]).then(d => {
+      const [safeData, data] = d;
+      if(safeData !== null) {
+        document.getElementById('result').innerHTML = safeData;
+      }
+      if(data !== null) {
+        document.getElementById('error').innerHTML = data;
+      }
+    });
+  });
+</script>
+</html>

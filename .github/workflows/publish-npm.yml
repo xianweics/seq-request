@@ -67,10 +67,6 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
-          
-      - name: Test SSH Connection
-        run: |
-          ssh -T git@github.com
       
       - name: Push Git Changes
         run: git push origin main

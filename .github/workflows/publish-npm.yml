@@ -59,6 +59,11 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  
           
+      - name: Set Git User
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com" 
+          
       - name: Bump Version
         run: |
           npm version ${{ steps.bump-type.outputs.type }} -m "chore: release v%s"

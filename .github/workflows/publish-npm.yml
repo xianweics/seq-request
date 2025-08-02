@@ -58,8 +58,18 @@ jobs:
           npm version ${{ steps.bump-type.outputs.type }} -m "chore: release v%s"
           new_version=$(node -p "require('./package.json').version")
           echo "New version: $new_version"
-      - name: Push Version Update
-        run: git push origin main
+          
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config remote.origin.url "git@github.com:xianweics/seq-request.git"
+      
+      - name: Push Git Changes
+        run: |
+          git push origin main
       
       - name: Login to npm
         run: |

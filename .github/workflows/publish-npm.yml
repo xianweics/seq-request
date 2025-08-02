@@ -59,10 +59,17 @@ jobs:
           new_version=$(node -p "require('./package.json').version")
           echo "New version: $new_version"
           
-      - name: Push Git Changes
+      - name: Configure SSH
         run: |
-          git config remote.origin.url "https://${{ secrets.GIT_PAT }}@github.com/xianweics/seq-request.git"
-          git push origin main
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+      
+      - name: Push Git Changes
+        run: git push origin main
       
       - name: Login to npm
         run: |
@@ -73,4 +80,3 @@ jobs:
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  
-

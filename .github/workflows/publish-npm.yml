@@ -20,11 +20,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          registry-url: https://registry.npmjs.org/
 
       - name: Install pnpm
         run: npm install -g pnpm@latest
 
+      - name: Install dependencies
+        run: pnpm install
+        
       - name: Run tests with pnpm
         run: pnpm test 
 
